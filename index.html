@@ -1,42 +1,61 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <style>
-      body {
-        margin: 0;
-        font-family: monospace;
-        font-size: 2.5rem; /* plus petit */
-        color: white;      /* texte blanc */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+<head>
+<meta charset="utf-8" />
 
-        /* 🔥 image de fond — remplace l’URL ci-dessous */
-        background-image: url("https://grouperenault.sharepoint.com/sites/NovomestoPlantConnect/Shared%20Documents/Forms/AllItems.aspx?viewid=0ed3c2de%2D5b6e%2D4a7f%2D9268%2Df6215502166f&id=%2Fsites%2FNovomestoPlantConnect%2FShared%20Documents%2F90%20Arhiv%2FCapture%20d%27%C3%A9cran%202025%2D11%2D19%20120621%2Epng&parent=%2Fsites%2FNovomestoPlantConnect%2FShared%20Documents%2F90%20Arhiv");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
+<style>
+  /* === TRANSPARENCE FORCÉE === */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: rgba(0,0,0,0) !important; /* 100% transparent */
+  }
 
-      #clock {
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.7); /* lisible sur image */
-      }
-    </style>
-  </head>
-  <body>
-    <div id="clock">--:--:--</div>
-    <script>
-      function updateTime() {
-        const now = new Date();
-        const h = String(now.getHours()).padStart(2, '0');
-        const m = String(now.getMinutes()).padStart(2, '0');
-        const s = String(now.getSeconds()).padStart(2, '0');
-        document.getElementById('clock').textContent = `${h}:${m}:${s}`;
-      }
-      setInterval(updateTime, 1000);
-      updateTime();
-    </script>
-  </body>
+  /* Anti-fond ajouté automatiquement par certains iframes */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0; 
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0) !important;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* === STYLE DE L'HORLOGE === */
+  body {
+    font-family: monospace;
+    font-size: 2.5rem; /* taille du texte */
+    color: white;      /* texte blanc */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #clock {
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7); /* lisible sur n'importe quel fond */
+  }
+</style>
+</head>
+
+<body>
+  <div id="clock">--:--:--</div>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
 </html>
+
